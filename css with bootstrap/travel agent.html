@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Gourmet Bites - Fine Dining Restaurant</title>
+  <style>
+    /* ===== COLORS ===== */
+    :root {
+      --blue: #8B4513;      /* Brown for restaurant */
+      --orange: #FF6B35;    /* Orange accent */
+      --light: #f8f9fa;     /* Light background */
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    /* ===== NAVBAR (TOP MENU) ===== */
+    .navbar {
+      background: linear-gradient(135deg, var(--blue) 0%, #6B3410 100%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff !important;
+    }
+    
+    /* Menu links styling */
+    .nav-link {
+      color: #fff !important;
+      margin-left: 20px;
+      transition: 0.3s;  /* Smooth change */
+    }
+    
+    .nav-link:hover {
+      color: var(--orange) !important;
+    }
+    
+    /* ===== HERO SECTION (BIG BANNER AT TOP) ===== */
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                  url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&h=600&fit=crop') center/cover;
+      height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+    
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+    
+    .hero-content p {
+      font-size: 1.3rem;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+    }
+    
+    /* Main button in hero section */
+    .cta-button {
+      background-color: var(--orange);
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      transition: 0.3s;
+    }
+    
+    .cta-button:hover {
+      background-color: #e55a24;
+      transform: scale(1.05);
+    }
+    
+    /* ===== ALL SECTIONS ===== */
+    section {
+      padding: 60px 0;
+    }
+    
+    /* Section heading styling */
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+      padding-bottom: 20px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--blue);
+    }
+    
+    /* Orange line under section titles */
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background-color: var(--orange);
+      border-radius: 2px;
+    }
+    
+    /* ===== MENU CARDS ===== */
+    .menu-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Card moves up when you hover over it */
+    .menu-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .menu-card img {
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .card-body {
+      padding: 20px;
+    }
+    
+    .card-title {
+      color: var(--blue);
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+    
+    .price-badge {
+      background-color: var(--orange);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    
+    /* Learn More button */
+    .btn-learn-more {
+      background-color: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 8px 25px;
+      transition: 0.3s;
+    }
+    
+    .btn-learn-more:hover {
+      background-color: var(--orange);
+    }
+    
+    /* ===== ACCORDION (EXPANDABLE SECTIONS) ===== */
+    .accordion-button {
+      background-color: var(--light);
+      border: 2px solid #ddd;
+      color: var(--blue);
+      font-weight: 600;
+    }
+    
+    /* When accordion is open */
+    .accordion-button:not(.collapsed) {
+      background-color: var(--blue);
+      color: white;
+    }
+    
+    .accordion-body {
+      background-color: #fff;
+    }
+    
+    /* ===== CONTACT FORM SECTION ===== */
+    .contact-section {
+      background-color: var(--light);
+    }
+    
+    .form-label {
+      color: var(--blue);
+      font-weight: 600;
+    }
+    
+    /* Input field focus (when clicked) */
+    .form-control:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+    }
+    
+    /* Submit button */
+    .btn-submit {
+      background-color: var(--orange);
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      font-weight: 600;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+    
+    .btn-submit:hover {
+      background-color: #e55a24;
+      transform: scale(1.05);
+    }
+    
+    /* ===== FOOTER (BOTTOM SECTION) ===== */
+    footer {
+      background: linear-gradient(135deg, var(--blue) 0%, #6B3410 100%);
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    /* Social media icons */
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 15px;
+      transition: 0.3s;
+    }
+    
+    .social-icons a:hover {
+      color: var(--orange);
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">
+        <i class="fas fa-utensils"></i> Gourmet Bites
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#menu">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="hero-section">
+    <div class="hero-content">
+      <h1>Delicious Meals Await</h1>
+      <p>Experience Fine Dining with Fresh & Flavorful Cuisine</p>
+      <button class="btn cta-button" onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})">
+        View Our Menu
+      </button>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Signature Dishes</h2>
+      </div>
+      
+      <div class="row g-4">
+        
+        <div class="col-md-6 col-lg-4">
+          <div class="card menu-card">
+            <img src="https://images.unsplash.com/photo-1580959375944-abd7e6eca6f7?w=400&h=300&fit=crop" class="card-img-top" alt="Grilled Salmon">
+            <div class="card-body">
+              <h5 class="card-title">Grilled Salmon</h5>
+              <p class="card-text">Fresh Atlantic salmon grilled to perfection with lemon butter sauce and seasonal vegetables.</p>
+              <span class="price-badge">$24.99</span>
+              <a href="#" class="btn btn-learn-more">Order Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="card menu-card">
+            <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400&h=300&fit=crop" class="card-img-top" alt="Ribeye Steak">
+            <div class="card-body">
+              <h5 class="card-title">Prime Ribeye Steak</h5>
+              <p class="card-text">Tender, juicy premium cut cooked to your preference with truffle mashed potatoes.</p>
+              <span class="price-badge">$32.99</span>
+              <a href="#" class="btn btn-learn-more">Order Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="card menu-card">
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop" class="card-img-top" alt="Pasta">
+            <div class="card-body">
+              <h5 class="card-title">Pasta Alfredo</h5>
+              <p class="card-text">Creamy fettuccine with parmesan and fresh herbs.</p>
+              <span class="price-badge">$18.99</span>
+              <a href="#" class="btn btn-learn-more">Order Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="background-color: var(--light);">
+    <div class="container">
+      <div class="section-title">
+        <h2>About Us</h2>
+      </div>
+      
+      <div class="row align-items-center g-4">
+        <div class="col-md-6">
+          <img src="https://images.unsplash.com/photo-1517457373614-b7152f800fd1?w=500&h=400&fit=crop" alt="Restaurant" class="img-fluid rounded" style="box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+        </div>
+        
+        <div class="col-md-6">
+          <h3 style="color: var(--blue); margin-bottom: 20px;">Welcome to Gourmet Bites</h3>
+          <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+            At Gourmet Bites, we believe that great food brings people together. Our restaurant is dedicated to providing you with the finest dining experience using only the freshest ingredients and traditional cooking methods.
+          </p>
+          <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+            Our team of experienced chefs works tirelessly to create dishes that are not only delicious but also beautifully presented. Whether you're celebrating a special occasion or simply enjoying a meal with loved ones, we're here to make your experience unforgettable.
+          </p>
+          <p style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 0;">
+            Come visit us and taste the difference quality makes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Make a Reservation</h2>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <form>
+            <div class="row g-3">
+              
+              <div class="col-md-6">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+              </div>
+
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+              </div>
+
+              <div class="col-md-6">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="(555) 123-4567" required>
+              </div>
+
+              <div class="col-md-6">
+                <label for="date" class="form-label">Reservation Date</label>
+                <input type="date" class="form-control" id="date" required>
+              </div>
+
+              <div class="col-md-6">
+                <label for="time" class="form-label">Reservation Time</label>
+                <input type="time" class="form-control" id="time" required>
+              </div>
+
+              <div class="col-12">
+                <label for="message" class="form-label">Special Requests</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Any dietary restrictions, celebrations, or special requests..."></textarea>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-submit">Reserve Table</button>
+              </div>
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>&copy; 2025 Gourmet Bites Restaurant. All rights reserved. | Open Daily 11AM - 11PM</p>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="social-icons">
+            <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+</body>
+</html>

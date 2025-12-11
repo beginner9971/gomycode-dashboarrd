@@ -1,0 +1,79 @@
+ALGORITHM DistinctElementsSum
+// Problem 1: Find the sum of all distinct elements from two sets
+// Description: Given two sets, find the sum of all elements present in either set
+// Example: Set 1 = [3, 1, 7, 9], Set 2 = [2, 4, 1, 9, 3]
+// Output: 13 (distinct elements: 4, 7, 2)
+
+DECLARE set1[4] AS INTEGER
+DECLARE set2[5] AS INTEGER
+DECLARE size1, size2 AS INTEGER
+DECLARE sum AS INTEGER
+DECLARE i, j AS INTEGER
+DECLARE found AS BOOLEAN
+
+BEGIN
+    // Initialize arrays
+    set1[0] ← 3
+    set1[1] ← 1
+    set1[2] ← 7
+    set1[3] ← 9
+    size1 ← 4
+
+    set2[0] ← 2
+    set2[1] ← 4
+    set2[2] ← 1
+    set2[3] ← 9
+    set2[4] ← 3
+    size2 ← 5
+
+    // Initialize sum counter
+    sum ← 0
+
+    // Step 1: Compare each element of set1 with set2
+    // If element from set1 is NOT in set2, add it to sum
+    FOR i = 0 TO size1 - 1 DO
+        found ← FALSE
+        FOR j = 0 TO size2 - 1 DO
+            IF set1[i] = set2[j] THEN
+                found ← TRUE
+            END IF
+        END FOR
+        
+        // If element not found in set2, add to sum
+        IF found = FALSE THEN
+            sum ← sum + set1[i]
+        END IF
+    END FOR
+
+    // Step 2: Compare each element of set2 with set1
+    // If element from set2 is NOT in set1, add it to sum
+    FOR i = 0 TO size2 - 1 DO
+        found ← FALSE
+        FOR j = 0 TO size1 - 1 DO
+            IF set2[i] = set1[j] THEN
+                found ← TRUE
+            END IF
+        END FOR
+        
+        // If element not found in set1, add to sum
+        IF found = FALSE THEN
+            sum ← sum + set2[i]
+        END IF
+    END FOR
+
+    // Display results
+    WRITE "Set 1: "
+    FOR i = 0 TO size1 - 1 DO
+        WRITE set1[i] + " "
+    END FOR
+    WRITE ""
+
+    WRITE "Set 2: "
+    FOR i = 0 TO size2 - 1 DO
+        WRITE set2[i] + " "
+    END FOR
+    WRITE ""
+
+    WRITE "Sum of distinct elements: " + sum
+
+END
